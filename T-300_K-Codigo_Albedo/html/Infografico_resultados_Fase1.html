@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Análise de Sensores para o Projeto UHIMWS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Scientific Neutral (Beige, Dark Slate, Muted Teal) -->
+    <!-- Application Structure Plan: The SPA is designed as a linear, scrollable narrative infographic. The structure guides the user from the "Why" (Project Context), to the "How" (Methodology), through the "What" (Detailed Results of each analysis), to a final "Conclusion" (The Verdict and Next Steps). This narrative flow was chosen over a complex dashboard to make the rigorous engineering validation process accessible and understandable for a broader audience, like a research group, telling a clear story from problem to solution. -->
+    <!-- Visualization & Content Choices: 
+        - Project Intro -> Goal: Inform -> Presentation: Large text, simple description -> Justification: Quickly establishes context.
+        - Methodology -> Goal: Organize/Inform -> Presentation: Styled cards with icons -> Interaction: N/A -> Justification: Breaks down the complex validation process into three digestible concepts (Stability, Reliability, Noise).
+        - Stability Results -> Goal: Compare/Rank -> Viz: Horizontal Bar Chart & HTML Table -> Justification: Bar chart provides immediate visual ranking of the best/worst performers based on the primary metric (STD @ 2min). Table offers detailed data for all aggregation windows. Library: Chart.js.
+        - Reliability Results -> Goal: Compare/Rank -> Viz: Horizontal Bar Chart & HTML Table -> Justification: Effectively visualizes the operational consistency, highlighting top performers with zero failures. Library: Chart.js.
+        - Noise Results -> Goal: Compare/Rank -> Viz: Grouped Bar Chart & HTML Table -> Justification: Grouped bars are ideal for comparing sensor responses across the three hierarchical noise thresholds (low, medium, critical). Library: Chart.js.
+        - Outliers -> Goal: Compare -> Presentation: Textual summary -> Justification: Avoids a cluttered boxplot chart. The core insight (BMP/BME superiority) is better communicated textually in this infographic context, supporting the other findings.
+        -> CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF7; /* Warm Beige Background */
+            color: #334155; /* Slate-700 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            max-height: 60vh;
+        }
+        .grouped-chart-container {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            max-height: 70vh;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header Section -->
+    <header class="w-full min-h-screen flex flex-col justify-center items-center text-center p-8 bg-slate-800 text-white" style="background-color: #005f73;">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">Análise de Sensores de Temperatura</h1>
+            <p class="mt-4 text-lg md:text-xl font-light text-slate-300">Validando componentes para a Estação Meteorológica do Projeto UHIMWS</p>
+            <div class="mt-8 text-sm text-slate-400">
+                <p>Período de Análise: 21 a 31 de Agosto de 2025</p>
+                <p>Equipe: Prof. Clayrton, Prof. Torresini, Vinicius, Dante</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-16 md:py-24 max-w-5xl space-y-24">
+
+        <!-- Methodology Section -->
+        <section id="methodology" class="fade-in">
+            <h2 class="text-3xl font-bold text-center mb-12">O Processo de Validação</h2>
+            <div class="grid md:grid-cols-3 gap-8 text-center">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <div class="text-4xl mb-4" style="color: #0a9396;">🎯</div>
+                    <h3 class="text-xl font-semibold mb-2">Análise de Estabilidade</h3>
+                    <p class="text-slate-600 text-sm">Medimos o ruído eletrônico e a precisão de cada sensor, avaliando qual deles fornece as leituras mais consistentes ao longo do tempo. Menor variação significa maior precisão.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <div class="text-4xl mb-4" style="color: #0a9396;">🔌</div>
+                    <h3 class="text-xl font-semibold mb-2">Análise de Disponibilidade</h3>
+                    <p class="text-slate-600 text-sm">Quantificamos a confiabilidade operacional, calculando a frequência com que cada sensor falha em reportar dados. Menos falhas significa maior confiabilidade.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <div class="text-4xl mb-4" style="color: #0a9396;">⚡️</div>
+                    <h3 class="text-xl font-semibold mb-2">Análise de Ruído</h3>
+                    <p class="text-slate-600 text-sm">Identificamos falhas dinâmicas e picos de ruído anômalos, medindo a resistência de cada sensor a variações súbitas e irrealistas. Menos picos significa maior robustez.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stability Analysis -->
+        <section id="stability" class="fade-in">
+            <h2 class="text-3xl font-bold text-center">Resultados: Estabilidade (Precisão)</h2>
+            <p class="text-center text-slate-600 mt-2 mb-12 max-w-3xl mx-auto">Comparamos o Desvio Padrão Médio de cada sensor. Os resultados mostram que a família de sensores BMP e o BME280 são consistentemente os mais estáveis e precisos.</p>
+            <div class="grid lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                    <div class="chart-container">
+                        <canvas id="stabilityChart"></canvas>
+                    </div>
+                </div>
+                <div id="stabilityTableContainer" class="lg:col-span-2 text-sm">
+                    <h4 class="font-semibold mb-2 text-center">Tabela de Desvio Padrão Médio (°C)</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- Availability Analysis -->
+        <section id="availability" class="fade-in">
+            <h2 class="text-3xl font-bold text-center">Resultados: Disponibilidade (Confiabilidade)</h2>
+            <p class="text-center text-slate-600 mt-2 mb-12 max-w-3xl mx-auto">A confiabilidade geral dos sensores foi altíssima. Os sensores BMP280 e BMP180 tiveram um desempenho perfeito, sem nenhuma falha de leitura no período.</p>
+            <div class="grid lg:grid-cols-5 gap-8 items-start">
+                <div class="lg:col-span-3 bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                     <div class="chart-container">
+                        <canvas id="availabilityChart"></canvas>
+                    </div>
+                </div>
+                <div id="availabilityTableContainer" class="lg:col-span-2 text-sm">
+                     <h4 class="font-semibold mb-2 text-center">Tabela de Taxa de Falha (%)</h4>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Noise Analysis -->
+        <section id="noise" class="fade-in">
+            <h2 class="text-3xl font-bold text-center">Resultados: Variação Súbita (Picos de Ruído)</h2>
+            <p class="text-center text-slate-600 mt-2 mb-12 max-w-3xl mx-auto">Analisamos a resistência dos sensores a falhas dinâmicas. A maioria se mostrou excelente, mas alguns, como o DHT11 e AHT10, registraram picos anômalos, indicando maior suscetibilidade a falhas.</p>
+             <div class="bg-white p-6 rounded-lg shadow-sm border border-slate-200">
+                 <div class="grouped-chart-container">
+                    <canvas id="noiseChart"></canvas>
+                </div>
+            </div>
+            <div id="noiseTableContainer" class="text-sm mt-8">
+                <h4 class="font-semibold mb-2 text-center">Tabela de Picos de Ruído por Limiar</h4>
+            </div>
+        </section>
+
+        <!-- Conclusion Section -->
+        <section id="conclusion" class="text-center bg-white p-10 rounded-lg shadow-sm border border-slate-200 fade-in">
+            <h2 class="text-3xl font-bold">O Veredito da Fase 1</h2>
+            <p class="text-slate-600 mt-4 max-w-3xl mx-auto">A análise intrínseca revelou um grupo claro de sensores de alto desempenho. Com base na combinação de estabilidade, confiabilidade e resistência a ruído, os seguintes componentes foram pré-aprovados:</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <span class="bg-teal-100 text-teal-800 text-sm font-semibold px-4 py-2 rounded-full" style="background-color: #e9d8a6; color:#001219;">BMP280</span>
+                <span class="bg-teal-100 text-teal-800 text-sm font-semibold px-4 py-2 rounded-full" style="background-color: #e9d8a6; color:#001219;">BME280</span>
+                <span class="bg-teal-100 text-teal-800 text-sm font-semibold px-4 py-2 rounded-full" style="background-color: #e9d8a6; color:#001219;">BMP388</span>
+                <span class="bg-teal-100 text-teal-800 text-sm font-semibold px-4 py-2 rounded-full" style="background-color: #e9d8a6; color:#001219;">BMP180</span>
+                <span class="bg-teal-100 text-teal-800 text-sm font-semibold px-4 py-2 rounded-full" style="background-color: #e9d8a6; color:#001219;">MCP9808</span>
+            </div>
+            <hr class="my-8 border-slate-200">
+            <h3 class="text-xl font-semibold">Próximos Passos</h3>
+            <p class="text-slate-600 mt-2 max-w-3xl mx-auto">Estes sensores de elite avançarão para a **Fase 2: Análise de Dados Extrínsecos**, onde sua **exatidão** será rigorosamente testada contra os dados de estações meteorológicas oficiais para a calibração final.</p>
+        </section>
+
+    </main>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- DATA FROM THE REPORT ---
+    const stabilityData = [
+        { sensor: "temp.bmp280", std_2min: 0.0058, std_3min: 0.0067, std_5min: 0.0082 },
+        { sensor: "temp.bmp388", std_2min: 0.0059, std_3min: 0.0071, std_5min: 0.0088 },
+        { sensor: "temp.bmp180", std_2min: 0.0060, std_3min: 0.0091, std_5min: 0.0124 },
+        { sensor: "temp.bme280", std_2min: 0.0063, std_3min: 0.0075, std_5min: 0.0093 },
+        { sensor: "temp.dht11", std_2min: 0.0076, std_3min: 0.0099, std_5min: 0.0150 },
+        { sensor: "temp.lm35dz", std_2min: 0.0085, std_3min: 0.0109, std_5min: 0.0146 },
+        { sensor: "temp.dht22", std_2min: 0.0131, std_3min: 0.0154, std_5min: 0.0185 },
+        { sensor: "temp.mcp9808", std_2min: 0.0143, std_3min: 0.0166, std_5min: 0.0203 },
+        { sensor: "temp.ds18b20", std_2min: 0.0381, std_3min: 0.0463, std_5min: 0.0559 },
+        { sensor: "temp.aht25", std_2min: 0.0392, std_3min: 0.0474, std_5min: 0.0573 },
+        { sensor: "temp.aht10", std_2min: 0.0487, std_3min: 0.0592, std_5min: 0.0718 },
+        { sensor: "temp.lm75", std_2min: 0.0631, std_3min: 0.0763, std_5min: 0.0917 }
+    ].sort((a, b) => a.std_2min - b.std_2min);
+
+    const availabilityData = [
+        { sensor: "temp.lm35dz", failure_rate: 0.42 }, { sensor: "temp.lm75", failure_rate: 0.21 },
+        { sensor: "temp.aht10", failure_rate: 0.11 }, { sensor: "temp.ds18b20", failure_rate: 0.05 },
+        { sensor: "temp.aht25", failure_rate: 0.04 }, { sensor: "temp.mcp9808", failure_rate: 0.03 },
+        { sensor: "temp.dht22", failure_rate: 0.02 }, { sensor: "temp.bme280", failure_rate: 0.01 },
+        { sensor: "temp.dht11", failure_rate: 0.01 }, { sensor: "temp.bmp388", failure_rate: 0.01 },
+        { sensor: "temp.bmp180", failure_rate: 0.00 }, { sensor: "temp.bmp280", failure_rate: 0.00 }
+    ].sort((a, b) => a.failure_rate - b.failure_rate);
+
+    const noiseData = [
+        { sensor: "temp.bmp280", p_01: 4, p_05: 0, p_10: 0 }, { sensor: "temp.bmp388", p_01: 6, p_05: 0, p_10: 0 },
+        { sensor: "temp.bme280", p_01: 12, p_05: 0, p_10: 0 }, { sensor: "temp.mcp9808", p_01: 36, p_05: 0, p_10: 0 },
+        { sensor: "temp.dht22", p_01: 66, p_05: 0, p_10: 0 }, { sensor: "temp.lm35dz", p_01: 73, p_05: 0, p_10: 0 },
+        { sensor: "temp.ds18b20", p_01: 110, p_05: 2, p_10: 0 }, { sensor: "temp.aht25", p_01: 111, p_05: 3, p_10: 0 },
+        { sensor: "temp.bmp180", p_01: 218, p_05: 0, p_10: 0 }, { sensor: "temp.aht10", p_01: 584, p_05: 4, p_10: 0 },
+        { sensor: "temp.dht11", p_01: 679, p_05: 12, p_10: 0 }, { sensor: "temp.lm75", p_01: 799, p_05: 0, p_10: 0 }
+    ].sort((a, b) => a.p_05 - b.p_05 || a.p_01 - b.p_01);
+    
+    // --- UTILITY FUNCTIONS ---
+    const createTable = (headers, data, containerId) => {
+        const container = document.getElementById(containerId);
+        const table = document.createElement('table');
+        table.className = 'w-full text-left border-collapse';
+        let thead = '<thead><tr class="bg-slate-100">';
+        headers.forEach(h => thead += `<th class="p-2 border-b font-semibold text-slate-700">${h}</th>`);
+        thead += '</tr></thead>';
+        table.innerHTML = thead;
+        
+        let tbody = '<tbody>';
+        data.forEach(row => {
+            tbody += '<tr class="border-b border-slate-200 hover:bg-slate-50">';
+            row.forEach(cell => tbody += `<td class="p-2">${cell}</td>`);
+            tbody += '</tr>';
+        });
+        tbody += '</tbody>';
+        table.innerHTML += tbody;
+        container.appendChild(table);
+    };
+
+    const tooltipCallback = {
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        return Array.isArray(label) ? label.join(' ') : label;
+                    }
+                }
+            }
+        }
+    };
+    
+    // --- RENDER FUNCTIONS ---
+    function renderStability() {
+        createTable(
+            ['Sensor', 'STD (2m)', 'STD (3m)', 'STD (5m)'],
+            stabilityData.map(d => [d.sensor.replace('temp.', ''), d.std_2min.toFixed(4), d.std_3min.toFixed(4), d.std_5min.toFixed(4)]),
+            'stabilityTableContainer'
+        );
+        const ctx = document.getElementById('stabilityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: stabilityData.map(d => d.sensor.replace('temp.', '')),
+                datasets: [{
+                    label: 'Desvio Padrão Médio (2min)',
+                    data: stabilityData.map(d => d.std_2min),
+                    backgroundColor: '#94d2bd',
+                    borderColor: '#0a9396',
+                    borderWidth: 1
+                }]
+            },
+            options: { ...tooltipCallback, indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { beginAtZero: true, title: { display: true, text: 'Desvio Padrão Médio (°C)' } } } }
+        });
+    }
+
+    function renderAvailability() {
+        createTable(
+            ['Sensor', 'Taxa de Falha (%)'],
+            availabilityData.map(d => [d.sensor.replace('temp.', ''), d.failure_rate.toFixed(2) + '%']),
+            'availabilityTableContainer'
+        );
+        const ctx = document.getElementById('availabilityChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: availabilityData.map(d => d.sensor.replace('temp.', '')),
+                datasets: [{
+                    label: 'Taxa de Falha (%)',
+                    data: availabilityData.map(d => d.failure_rate),
+                    backgroundColor: '#ee9b00',
+                    borderColor: '#ca6702',
+                    borderWidth: 1
+                }]
+            },
+            options: { ...tooltipCallback, indexAxis: 'y', responsive: true, maintainAspectRatio: false, scales: { x: { beginAtZero: true, title: { display: true, text: 'Taxa de Falha (%)' } } } }
+        });
+    }
+    
+    function renderNoise() {
+        createTable(
+            ['Sensor', 'Picos > 0.1°C', 'Picos > 0.5°C (Robusto)', 'Picos > 1.0°C (Crítico)'],
+            noiseData.map(d => [d.sensor.replace('temp.', ''), d.p_01, d.p_05, d.p_10]),
+            'noiseTableContainer'
+        );
+        const ctx = document.getElementById('noiseChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: noiseData.map(d => d.sensor.replace('temp.', '')),
+                datasets: [
+                    { label: 'Picos > 0.1°C', data: noiseData.map(d => d.p_01), backgroundColor: '#94d2bd' },
+                    { label: 'Picos > 0.5°C', data: noiseData.map(d => d.p_05), backgroundColor: '#ee9b00' },
+                    { label: 'Picos > 1.0°C', data: noiseData.map(d => d.p_10), backgroundColor: '#ae2012' }
+                ]
+            },
+            options: { ...tooltipCallback, responsive: true, maintainAspectRatio: false, scales: { x: { stacked: false, title: { display: true, text: 'Sensor' } }, y: { stacked: false, beginAtZero: true, title: { display: true, text: 'Nº de Picos de Ruído' } } } }
+        });
+    }
+
+    // --- SCROLL ANIMATION ---
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => {
+        observer.observe(el);
+    });
+    
+    // --- INITIALIZE ---
+    renderStability();
+    renderAvailability();
+    renderNoise();
+});
+</script>
+</body>
+</html>
+
+
