@@ -11,16 +11,16 @@ Explore, jogue e divirta-se!
 ### 🚀 T-300 K: Código Albedo
 *   **Descrição:** Uma incrível aventura de desenvolvimento de jogos.
 *   **Tecnologias:** HTML, CSS, JavaScript.
-*   **Repositório:** [Humba-IFSC/T-300_K-Codigo_Albedo](https://github.com/Humba-IFSC/T-300_K-Codigo_Albedo)
-*   **▶️ JOGAR no TWINE, AGORA?:** **[Acesse o site do jogo aqui!](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/html/Projeto_T-300_K_Codigo_Albedo.html)**
+*   **Repositório:** [Humba-IFSC/T-300_K-Codigo_Albedo](https://github.com/Humba-IFSC/Feira-de-Jogos/tree/main/T-300_K-Codigo_Albedo)
+*   **▶️ JOGAR no TWINE, AGORA?:** **[Acesse o site do jogo aqui!](https://humba-ifsc.github.io/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/Projeto_T-300_K_Codigo_Albedo.html)**
 
 <br>
 
 ### 🌌 Projeto UHIMWS
 *   **Descrição:** Projeto Ilhas de Calor Urbano em São José/SC.
 *   **Tecnologias:** HTML, CSS.
-*   **Repositório:** [Humba-IFSC/UHIMWS](https://github.com/Humba-IFSC/uhimws)
-*   **▶️ Quer espiar?:** **[Atualmente, onde estamos no Projeto!](https://humba-ifsc.github.io/uhimws/)**
+*   **Repositório:** [Humba-IFSC/UHIMWS](https://github.com/Humba-IFSC/Feira-de-Jogos/tree/main/uhimws)
+*   **▶️ Quer espiar?:** **[Atualmente, onde estamos no Projeto!](https://humba-ifsc.github.io/Feira-de-Jogos/uhimws/)**
 
 ---
 
