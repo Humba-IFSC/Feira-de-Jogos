@@ -12,7 +12,7 @@ Explore, jogue e divirta-se!
 *   **Descrição:** Uma incrível aventura de desenvolvimento de jogos.
 *   **Tecnologias:** HTML, CSS, JavaScript.
 *   **Repositório:** [Humba-IFSC/T-300_K-Codigo_Albedo](https://github.com/Humba-IFSC/T-300_K-Codigo_Albedo)
-*   **▶️ JOGAR AGORA:** **[Acesse o site do jogo aqui!](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/)**
+*   **▶️ JOGAR AGORA:** **[Acesse o site do jogo aqui!](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/html/Projeto_T-300_K_Codigo_Albedo.html)**
 
 <br>
 
