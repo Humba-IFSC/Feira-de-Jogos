@@ -19,7 +19,8 @@
 
 ---
 
-## Capítulo 0: O Prelúdio  ▶ [Iniciar o Jogo: T-300 K: Código Albedo](https://humba-ifsc.github.io/Feira-de-Jogo/T-300_K-Codigo_Albedo/html/Projeto_T-300_K_Codigo_Albedo.html)
+## Capítulo 0: O Prelúdio  
+▶ [Iniciar o Jogo: T-300 K: Código Albedo](https://humba-ifsc.github.io/Feira-de-Jogo/T-300_K-Codigo_Albedo/html/Projeto_T-300_K_Codigo_Albedo.html)
 
 Adormecido no gelo, é encontrado um vírus pré-histórico chamado **Kaloris**, por um grupo de pesquisas da **DeltaUmbra Corp.** O chefe desse projeto era o **Dr. Aris Thorne**.  
 
