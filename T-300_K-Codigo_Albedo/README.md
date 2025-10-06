@@ -10,10 +10,10 @@
 |**Formato HTML** | **Visualização Web** |
 |:---------------:|:--------------------:|
 |[Proposta de Atualização do DDJ](/html/Proposta_DDJ.html)|[▶ Novo DDJ???](https://humba-ifsc.github.io/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/Proposta_DDJ.html)| 
-|[Jogo - T-300 K: Código Albedo](/html/Projeto_T-300_K_Codigo_Albedo.html)|[▶ Iniciar o Jogo](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/html/Projeto_T-300_K_Codigo_Albedo.html)|
-|[Aula 30/09 - Continuação](html/Conexao_Albedo.html)|[- Diagrama V - Lado Direito](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/html/Conexao_Albedo.html)|
-|[Aula 30/09 - Atividade](html/Experimento_Albedo.html)|[- Diagrama V - Atividade Prática](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/html/Experimento_Albedo.html)|
-|[Relatório dos Sensores](html/Infografico_resultados_Fase1.html)|[- Relatório dos Sensores](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/html/html/Infografico_resultados_Fase1.html)|
+|[Jogo - T-300 K: Código Albedo](/html/Projeto_T-300_K_Codigo_Albedo.html)|[▶ Iniciar o Jogo](https://humba-ifsc.github.io/Feira-de-Jogo/T-300_K-Codigo_Albedo/html/Projeto_T-300_K_Codigo_Albedo.html)|
+|[Aula 30/09 - Continuação](html/Conexao_Albedo.html)|[- Diagrama V - Lado Direito](https://humba-ifsc.github.io/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/Conexao_Albedo.html)|
+|[Aula 30/09 - Atividade](html/Experimento_Albedo.html)|[- Diagrama V - Atividade Prática](https://humba-ifsc.github.io/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/Experimento_Albedo.html)|
+|[Relatório dos Sensores](html/Infografico_resultados_Fase1.html)|[- Relatório dos Sensores](https://humba-ifsc.github.io/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/html/Infografico_resultados_Fase1.html)|
 
 ## Capítulo 0: O Prelúdio  
 
