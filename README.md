@@ -1,8 +1,27 @@
-# Feira-de-Jogos
- O objetivo geral deste projeto é o desenvolvimento de jogos por parte das equipes dos alunos da fase oitava do Curso Técnico Integrado em Telecomunicações do IFSC Campus São José, tendo como produto final a promoção de uma feira de jogos para a comunidade escolar. 
+# 🎮 Feira de Jogos - IFSC 🎮
 
-## Dashboard da Fase 1 - Análise de Dados Intrínseca (ADI)
+Bem-vindo ao portal da nossa Feira de Jogos! Aqui você encontrará os projetos desenvolvidos pelas equipes do Curso Técnico Integrado em Telecomunicações.
 
-### Apresentação dos Resultados Parciais da Versão V1
+Explore, jogue e divirta-se!
 
-[Relatório de Análise Intrínseca de Sensores](https://humba-ifsc.github.io/uhimws/analise-sensores.html)
+---
+
+## Nossos Projetos
+
+### 🚀 T-300 K: Código Albedo
+*   **Descrição:** Uma incrível aventura de desenvolvimento de jogos.
+*   **Tecnologias:** HTML, CSS, JavaScript.
+*   **Repositório:** [Humba-IFSC/T-300_K-Codigo_Albedo](https://github.com/Humba-IFSC/T-300_K-Codigo_Albedo)
+*   **▶️ JOGAR AGORA:** **[Acesse o site do jogo aqui!](https://humba-ifsc.github.io/T-300_K-Codigo_Albedo/)**
+
+<br>
+
+### 🌌 Projeto UHIMWS
+*   **Descrição:** Projeto Ilhas de Calor Urbano em São José/SC.
+*   **Tecnologias:** HTML, CSS.
+*   **Repositório:** [Humba-IFSC/UHIMWS](https://github.com/Humba-IFSC/UHIMWS)
+*   **▶️ Quer espiar?:** **[Atualmente, onde estamos no Projeto!](https://humba-ifsc.github.io/UHIMWS/)**
+
+---
+
+*Desenvolvido com ❤️ no IFSC Campus São José.*
