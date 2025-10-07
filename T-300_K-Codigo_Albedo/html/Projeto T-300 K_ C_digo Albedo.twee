@@ -1,0 +1,648 @@
+:: StoryTitle
+Projeto T-300 K: Código Albedo
+
+
+:: StoryData
+{
+  "ifid": "CE2AD6DE-E4C7-4784-9AC8-D7C9DC8C76AD",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Variaveis Iniciais\\ ",
+  "zoom": 1
+}
+
+
+:: A Teia de Thorne {"position":"575,25","size":"100,100"}
+(if: (history:) contains "Fase 1: Laboratório do Dr. Thorne")[
+<p class="feedback-correto">ACESSO PERMITIDO!</p>
+]
+
+<h3 class="chapter-title">A Teia de Thorne</h3>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/imgAs_Missoes.jpeg" alt="As três missões">
+
+O tablet se desbloqueia, revelando não um plano, mas uma rede de dados criptografados. O mapa aponta para três locais na cidade. Vocês precisam seguir as pistas para, eventualmente, construir a Máquina de Entropia.
+
+<h4>Missões Disponíveis:</h4>
+
+(if: $fase2_completa is not true)[
+<p>[[<span class="nova-missao">→</span> Fase 2: Coletar Dados na Cidade Infectada->Fase 2: Cidade Infectada]]</p>
+]
+(else:)[
+<p class="completed-mission">✓ Fase 2: Dados da Cidade Coletados</p>
+]
+
+(if: $fase3_completa is not true)[
+<p>[[<span class="nova-missao">→</span> Fase 3: Infiltrar-se no Zepelim->Fase 3: Zepelim da &Delta;Umbra]]</p>
+]
+(else:)[
+<p class="completed-mission">✓ Fase 3: Registros do Zepelim Adquiridos</p>
+]
+
+(if: $fase4_completa is not true)[
+<p>[[<span class="nova-missao">→</span> Fase 4: Construir a Máquina->Fase 4: Indústria da Máquina]]</p>
+]
+(else:)[
+<p class="completed-mission">✓ Fase 4: Máquina de Entropia (Instável) Construída</p>
+]
+
+(if: $fase2_completa and $fase3_completa and $fase4_completa)[
+<p class="unlock-message"><strong>CAMINHO FINAL DESBLOQUEADO:</strong>  
+Com todos os dados em mãos, vocês têm o que precisam. É hora de buscar ajuda.</p>
+<p>[[Viajar para a Vila de Sobreviventes->Fase 5: Vila de Sobreviventes]]</p>
+]
+
+
+:: Acesso a Fase 1 {"position":"225,75","size":"100,100"}
+Bem-vindo ao jogo Projeto T-300 K: Código Albedo! 
+Você encontrou a porta de acesso a Fase 1. 
+Para abri-lá, precisará quebrar a senha de acesso.
+
+Quebre a senha, decifrando o seu primeiro ''Enigma''.
+
+<div class="Enigma">
+//Qual é o conceito fundamental para entender a preocupação com o aquecimento global do planeta? 
+Dica: Os estudos sobre a refletividade de uma superfície, deram início a toda a minha pesquisa e, consequentemente, a esta catástrofe?//
+</div>
+
+Você está diante do ''Tablet do Dr. Thorne''.
+
+  <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Tablet_Thorne.jpeg" alt="O Tablet do Dr. Thorne">
+
+Você tem '$tentativas' tentativa(s) restante(s).
+
+(link: "Tentar digitar a senha")[
+    (set: $senha_digitada to (trimmed: (lowercase: (prompt: "Digite a senha:", ""))))
+    (goto: "Fase 1: Laboratório do Dr. Thorne")
+]
+
+
+:: Escolha Final {"position":"925,50","size":"100,100"}
+<h3 class="chapter-title">A Escolha Final</h3>
+
+<p class="feedback-correto">TORRE ATIVADA. Máquina de Entropia conectada.</p>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/A_escolha_final.jpeg" alt="Os três possíveis finais">
+
+<div class="enigma">
+As forças da &Delta;Umbra estão neutralizadas. Com o controle da entropia planetária em suas mãos, e com as dúvidas sobre as verdadeiras intenções de Thorne ainda na sua mente, vocês precisam decidir.
+</div>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/A_Escolha_do_destino_Final.jpeg" alt="O destino em suas mãos e a um click ...">
+
+
+(if: $maquina_regulada is true)[
+	<p>[[Usar a máquina regulada (Final Bom)->Final Bom]]</p>
+]
+(else:)[
+	<p>[[Usar a máquina instável (Final Neutro)->Final Neutro]]</p>
+]
+
+<p>[[Quebrar a máquina (Final Ruim)->Final Ruim]]</p>
+
+
+:: Fase 1: Laboratório do Dr. Thorne {"position":"50,200","size":"100,100"}
+<h3 class="chapter-title">Fase 1: Laboratório do Dr. Thorne</h3>
+
+<div class="enigma">
+Vocês encontram refúgio no laboratório secreto do Dr. Thorne. Aqui, vocês recebem um briefing sobre a situação do mundo e descobrem pistas enigmáticas sobre o projeto em que ele estava trabalhando. O tablet pessoal de Thorne está bloqueado por uma única pergunta de segurança:
+
+(if: $senha_digitada is $senha_correta1)[
+    Parabéns! Você acertou a senha secreta!
+    (go-to: "A Teia de Thorne")
+    (set: $tentativas to $max_tentativas)
+](else:)[
+    (set: $tentativas to $tentativas - 1)
+    (if: $tentativas > 0)[
+        A senha $senha_digitada está incorreta. Você ainda tem '$tentativas'  tentativa(s) restante(s).
+        [[Tentar Novamente->Acesso a Fase 1]]
+    ](else:)[
+        Você esgotou todas as suas tentativas. A porta se fecha, e você é teletransportado de volta para o início.
+</div>      
+        [[Voltar ao Início->Projeto T-300 K - Início do Jogo]]
+    ]
+]
+
+
+:: Fase 2: Cidade Infectada {"position":"175,200","size":"100,100"}
+<h3 class="chapter-title">Fase 2: Cidade Infectada</h3>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Fase2_Febre_Urbana.jpeg" alt="A Cidade Infectada">
+
+Quebra a segunda senha, decifrando o seu segundo ''Enigma''
+
+<div class="enigma">
+<p>"Vocês precisam coletar dados sobre as 'ilhas de calor' da cidade. Essas informações são cruciais para desbloquear os arquivos mais profundos do Dr. Thorne sobre a Máquina de Entropia." </p>
+
+<p>À distância, vocês avistam um Zepelim da ΔUmbra Corp pairando sobre a cidade, um mau presságio.</p>
+
+<p>Vocês encontram um coletor de dados da &Delta;Umbra ao lado de um trecho de asfalto estranhamente escuro e quente. O dispositivo está danificado, mas o terminal de acesso ainda funciona, protegido por uma senha numérica. Ao lado, uma anotação de um técnico da &Delta;Umbra, deixada para trás na pressa:</p>
+
+<p><strong>LOG DE DADOS DO SENSOR AMBIENTAL 734 (DANIFICADO)</strong></p>
+<p><em>// Teste de eficiência do composto 'Umbra-Con-7'. Amostra padrão de <strong>10 kg</strong> exposta a uma fonte de radiação infravermelha calibrada. //</em></p>
+<p><em>// Log de aquecimento: Temperatura inicial da amostra às 12:00: <strong>25°C</strong>. Temperatura final às 12:05: <strong>45°C</strong>. //</em></p>
+<p><em>// Fonte de radiação aplicada por 5 minutos (300 segundos). Potência constante de <strong>600 Watts (600 Joules/segundo)</strong>. //</em></p>
+<p><em>// Senha de acesso ao coletor: O valor numérico calculado do calor específico (c) do composto, em J/kg°C. Arredonde para o número inteiro mais próximo, se necessário. //</em></p>
+</div>
+
+Você tem '$tentativas' tentativa(s) restante(s).
+
+(link: "Tentar digitar a senha")[
+    (set: $senha_digitada to (trimmed: (lowercase: (prompt: "Digite a senha:", ""))))
+    (set: $fase2_completa to true)
+    (goto: "Fase 2: Concluída")
+]
+
+
+:: Fase 2: Concluída {"position":"175,400","size":"100,100"}
+<h3 class="chapter-title">Fase 2: Concluída</h3>
+
+(if: $senha_digitada is $senha_correta2)[
+    Parabéns! Você acertou a senha secreta!
+    (go-to: "A Teia de Thorne")
+    (set: $tentativas to $max_tentativas)
+](else:)[
+    (set: $tentativas to $tentativas - 1)
+    (if: $tentativas > 0)[
+        A senha $senha_digitada está incorreta. Você ainda tem '$tentativas'  tentativa(s) restante(s).
+        [[Tentar Novamente->Fase 2: Cidade Infectada]]
+    ](else:)[
+        Você esgotou todas as suas tentativas. A porta se fecha, e você é teletransportado de volta para o início.
+        
+        [[Voltar ao Início->Projeto T-300 K - Início do Jogo]]
+    ]
+]
+
+
+:: Fase 3: Concluída {"position":"300,400","size":"100,100"}
+<h3 class="chapter-title">Fase 3: Concluída</h3>
+
+<p class="feedback-correto">REGISTROS ADQUIRIDOS.</p>
+<p>Vocês encontram registros de áudio do Dr. Thorne trabalhando para a &Delta;Umbra, o que aumenta o mistério sobre suas intenções. Vocês também descobrem a localização de uma vila de sobreviventes no gelo.</p>
+
+(if: $senha_digitada is $senha_correta3)[
+    Parabéns! Você acertou a senha secreta!
+    (go-to: "A Teia de Thorne")
+    (set: $tentativas to $max_tentativas)
+](else:)[
+    (set: $tentativas to $tentativas - 1)
+    (if: $tentativas > 0)[
+        A senha $senha_digitada está incorreta. Você ainda tem '$tentativas'  tentativa(s) restante(s).
+        [[Tentar Novamente->Fase 3: Zepelim da &Delta;Umbra]]
+    ](else:)[
+        Você esgotou todas as suas tentativas. A porta se fecha, e você é teletransportado de volta para o início.
+        
+        [[Voltar ao Início->Projeto T-300 K - Início do Jogo]]
+    ]
+]
+
+
+:: Fase 3: Zepelim da &Delta;Umbra {"position":"300,200","size":"100,100"}
+<h3 class="chapter-title">Fase 3: Zepelim da &Delta;Umbra</h3>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Fase3_Zepelim.jpeg" alt="Os planos da ΔUmbra e o verdadeiro papel do Dr. Thorne">
+
+"Para entender os planos da ΔUmbra e o verdadeiro papel do Dr. Thorne, vocês precisam se infiltrar no Zepelim que patrulha a cidade."
+
+<div class="enigma">
+O acesso à cabine de comando requer a manipulação das válvulas de pressão. A dica no painel diz: "A temperatura constante, qual lei descreve a relação inversamente proporcional entre pressão e volume?"
+</div>
+
+Você tem '$tentativas' tentativa(s) restante(s).
+
+(link: "Tentar digitar a senha")[
+    (set: $senha_digitada to (trimmed: (lowercase: (prompt: "Digite a senha:", ""))))
+    (set: $fase3_completa to true)
+    (goto: "Fase 3: Concluída")
+]
+
+
+:: Fase 4: Concluída {"position":"425,400","size":"100,100"}
+<h3 class="chapter-title">Fase 4: Concluída</h3>
+
+<p class="feedback-correto">MÁQUINA CONSTRUÍDA.</p>
+<p>A Máquina de Entropia ganha vida, mas um último registro de áudio de Thorne avisa: "Não consegui terminar... ela está instável! Encontrem... outros...". A mensagem se corta.</p>
+
+(if: $senha_digitada is $senha_correta4)[
+    Parabéns! Você acertou a senha secreta!
+    (go-to: "A Teia de Thorne")
+    (set: $tentativas to $max_tentativas)
+](else:)[
+    (set: $tentativas to $tentativas - 1)
+    (if: $tentativas > 0)[
+        A senha $senha_digitada está incorreta. Você ainda tem '$tentativas'  tentativa(s) restante(s).
+        [[Tentar Novamente->Fase 4: Indústria da Máquina]]
+    ](else:)[
+        Você esgotou todas as suas tentativas. A porta se fecha, e você é teletransportado de volta para o início.
+        
+        [[Voltar ao Início->Projeto T-300 K - Início do Jogo]]
+    ]
+]
+
+
+:: Fase 4: Indústria da Máquina {"position":"425,200","size":"100,100"}
+<h3 class="chapter-title">Fase 4: Indústria da Máquina</h3>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Fase4_Maquina_Entropia.jpeg" alt="A contrução do reator principal precisa de uma senha. A dica é: 'ΔU = Q - W'.">
+
+"Os dados coletados revelam a localização de uma indústria abandonada onde Thorne montou seu projeto. É hora de construir a máquina."
+
+<div class="enigma">
+A ignição do reator principal precisa de uma senha. A dica é: "ΔU = Q - W. Quando um sistema recebe calor e não realiza trabalho, qual grandeza se altera?"
+</div>
+
+Você tem '$tentativas' tentativa(s) restante(s).
+
+(link: "Tentar digitar a senha")[
+    (set: $senha_digitada to (trimmed: (lowercase: (prompt: "Digite a senha:", ""))))
+    (set: $fase4_completa to true)
+    (goto: "Fase 4: Concluída")
+]
+
+
+:: Fase 5: Concluída {"position":"550,400","size":"100,100"}
+<h3 class="chapter-title">Fase 5: Concluída</h3>
+
+<p class="feedback-correto">ACESSO CONCEDIDO.</p>
+<p>Os sobreviventes da vila, um grupo de cientistas, explicam o que é necessário para finalizar a máquina: conectá-la a uma torre de transmissão para ampliar seu efeito e encontrar componentes de calibração para controlar seu poder.</p>
+
+(if: $senha_digitada is $senha_correta5)[
+    Parabéns! Você acertou a senha secreta!
+    (go-to: "Fase 6: A Torre Celeste II")
+    (set: $tentativas to $max_tentativas)
+](else:)[
+    (set: $tentativas to $tentativas - 1)
+    (if: $tentativas > 0)[
+        A senha $senha_digitada está incorreta. Você ainda tem '$tentativas'  tentativa(s) restante(s).
+        [[Tentar Novamente->Fase 5: Vila de Sobreviventes]]
+    ](else:)[
+        Você esgotou todas as suas tentativas. A porta se fecha, e você é teletransportado de volta para o início.
+        
+        [[Voltar ao Início->Projeto T-300 K - Início do Jogo]]
+    ]
+]
+
+
+:: Fase 5: Vila de Sobreviventes {"position":"550,200","size":"100,100"}
+<h3 class="chapter-title">Fase 5: Vila de Sobreviventes</h3>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Fase5_A_vila_Soberviventes.jpeg" alt="A vila - Sociedade tecnológica isolada,">
+
+"Os registros do Zepelim revelaram a localização de uma sociedade tecnológica isolada, protegida por uma barreira de gelo. Eles são sua única esperança para estabilizar a máquina."
+
+<div class="enigma">
+A entrada da vila é protegida por um enigma climático. Usando a Máquina de Entropia em baixa potência, vocês precisam provar seu conhecimento. A pergunta é: "Qual tipo de calor é absorvido durante uma mudança de estado sem alteração de temperatura?"
+</div>
+
+Você tem '$tentativas' tentativa(s) restante(s).
+
+(link: "Tentar digitar a senha")[
+    (set: $senha_digitada to (trimmed: (lowercase: (prompt: "Digite a senha:", ""))))
+    (set: $fase5_completa to true)
+    (goto: "Fase 5: Concluída")
+]
+
+
+:: Fase 6: A Torre Celeste {"position":"675,200","size":"100,100"}
+<h3 class="chapter-title">Fase 6: A Torre Celeste</h3>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Fase6_A_Torre_Celeste.jpeg" alt="A Torre Celeste">
+
+
+"Os cientistas da vila ajudaram a estabilizar a máquina, mas para que ela tenha um alcance global, precisa ser conectada a uma antiga torre de transmissão. A ΔUmbra já sabe da sua localização e está a caminho."
+
+(if: $maquina_regulada is false)
+<p>Os cientistas avisaram: "A máquina funciona, mas o núcleo ainda não está perfeitamente regulado. Na torre, procurem por componentes de calibração. Sem eles, o pulso de energia será... imprevisível."</p>
+
+(link: "Procurar pelos componentes de calibração")[
+(set: $maquina_regulada to true)
+(replace:?options)[<p class="feedback-correto">Componentes de calibração encontrados! A máquina agora pode ser usada com precisão.</p>]
+]
+
+<div class="enigma">
+O console de transmissão da torre aguarda o comando final. "Como a energia do Sol viaja através do vácuo do espaço para chegar à Terra?"
+</div>
+
+Você tem '$tentativas' tentativa(s) restante(s).
+
+(link: "Tentar digitar a senha")[
+    (set: $senha_digitada to (trimmed: (lowercase: (prompt: "Digite a senha:", ""))))
+    (set: $fase6_completa to true)
+    (goto: "Fase 6: Concluída")
+]
+
+
+:: Fase 6: A Torre Celeste II {"position":"825,400","size":"100,100"}
+<h3 class="chapter-title">Fase 6: A Torre Celeste</h3>
+
+"Os cientistas da vila ajudaram a estabilizar a máquina, mas para que ela tenha um alcance global, precisa ser conectada a uma antiga torre de transmissão. A ΔUmbra já sabe da sua localização e está a caminho."
+
+(if: $maquina_regulada is false)[
+	<p>Os cientistas avisaram: "A máquina funciona, mas o núcleo ainda não está perfeitamente regulado. Na torre, procurem por componentes de calibração. Sem eles, o pulso de energia será... imprevisível."</p>
+	|options>[(link: "Procurar pelos componentes de calibração")[
+		(set: $maquina_regulada to true)
+		(replace: ?options)[<p class="feedback-correto">Componentes de calibração encontrados! A máquina agora pode ser usada com precisão.</p>]
+	]]
+](else:)[
+	<p class="feedback-correto">Componentes de calibração encontrados! A máquina agora pode ser usada com precisão.</p>
+]
+
+<div class="enigma">
+O console de transmissão da torre aguarda o comando final. "Como a energia do Sol viaja através do vácuo do espaço para chegar à Terra?"
+</div>
+
+Você tem $tentativas tentativa(s) restante(s).
+
+|feedback>[](link: "Tentar digitar a senha")[
+	(set: _resposta to (trimmed: (lowercase: (prompt: "Digite a senha:", ""))))
+	(if: _resposta is $senha_correta6 or _resposta is "irradiacao")[
+		(goto: "Escolha Final")
+	](else:)[
+		(set: $tentativas to it - 1)
+		(if: $tentativas > 0)[
+			(replace: ?feedback)[<p class="feedback-errado">SENHA INCORRETA. Você ainda tem $tentativas tentativa(s).</p>(link-rerun: "Tentar novamente")]
+		](else:)[
+			(goto: "Game Over")
+		]
+	]
+]
+
+
+:: Fase 6: Concluída {"position":"700,400","size":"100,100"}
+(if: $senha_digitada is $senha_correta6)[
+    Parabéns! Você acertou a senha secreta!
+    (go-to: "Escolha Final")
+    (set: $tentativas to $max_tentativas)
+](else:)[
+    (set: $tentativas to $tentativas - 1)
+    (if: $tentativas > 0)[
+        A senha $senha_digitada está incorreta. Você ainda tem '$tentativas'  tentativa(s) restante(s).
+        [[Tentar Novamente->Fase 6: A Torre Celeste]]
+    ](else:)[
+        Você esgotou todas as suas tentativas. A porta se fecha, e você é teletransportado de volta para o início.
+        
+        [[Voltar ao Início->Projeto T-300 K - Início do Jogo]]
+    ]
+]
+
+
+:: Final Bom {"position":"800,225","size":"100,100"}
+<h1>FIM: Equilíbrio</h1>
+ <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/O_Crisol_Fogo.jpeg" alt="Final bom. Boa escolha, O Crisol de Fogo.">
+
+<div class="enigma">
+Com os componentes de calibração, vocês ativam a máquina com precisão cirúrgica. Um pulso de energia resfria o planeta na medida certa, fazendo com que o vírus KALORIS entre em hibernação em escala global. A humanidade ganha tempo para estudar o vírus e encontrar uma cura definitiva. Vocês não apenas salvaram o mundo, mas deram a ele um futuro.
+</div>
+ <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Final_Bom_Um_novo_amanhecer.jpeg" alt="Um novo amanhecer para a humanidade.">
+
+
+[[Jogar Novamente->Projeto T-300 K - Início do Jogo]]
+
+
+:: Final Neutro {"position":"925,225","size":"100,100"}
+<h1>FIM: Recomeço</h1>
+ <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/O_Inverno_Artificial.jpeg" alt="A humanidade está salva, mas jogada nas trevas ...">
+
+<div class="enigma">
+Vocês ativam a máquina instável. Um pulso de energia pura varre o planeta, erradicando o KALORIS. Mas, como os cientistas temiam, a onda de choque também destrói toda a tecnologia avançada da Terra. A humanidade está salva do vírus, mas é jogada de volta a uma nova idade das trevas, forçada a reconstruir a civilização do zero.
+</div>
+ <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/O_Recomeço_Final_neutro.jpeg" alt="Um novo recomeço para o planeta sem tecnologia ...">
+
+[[Jogar Novamente->Projeto T-300 K - Início do Jogo]]
+
+
+:: Final Ruim {"position":"1050,225","size":"100,100"}
+<h1>FIM: Desconfiança</h1>
+  <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Desconfianca_Final_ruim.jpeg" alt="Desconfiança - Final com desolação!">
+
+<div class="enigma">
+Dominados pela desconfiança no Dr. Thorne, vocês destroem a máquina. A única esperança da humanidade se desfaz. A &Delta;Umbra Corp, mesmo enfraquecida, eventualmente se recupera e, sem oposição, seu plano de vender a salvação para a elite se concretiza. O mundo que vocês conheciam está perdido.
+</div>
+
+[[Jogar Novamente->Projeto T-300 K - Início do Jogo]]
+
+
+:: Projeto T-300 K - Início do Jogo {"position":"375,0","size":"100,100"}
+<h2 class="story-title">Projeto T-300 K: Código Albedo</h2>
+<h3 class="chapter-title">Capítulo 0: O Prelúdio</h3>
+<div class="header-image"></div>
+<img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Pre_Fase1_O_virus_KALORIS.jpeg" alt="Descoberta do KALORIS">
+
+Adormecido no gelo da Antártida, um vírus pré-histórico é encontrado por uma equipe de pesquisas da ΔUmbra Corp. O nome do achado: KALORIS. O chefe do projeto: o brilhante Engenheiro e Climatologista, Dr. Aris Thorne.
+
+As pesquisas revelam duas coisas: o vírus "zumbifica" suas vítimas e sua transmissão é potencializada pelo calor. Para a ΔUmbra, é a oportunidade perfeita: espalhar o vírus e vender a salvação para controlar o mundo. Thorne é encarregado de criar uma tecnologia para aquecer o planeta, acelerando o plano.
+
+Arrependido, Thorne trabalha em segredo. Ele cria a Máquina Térmica, denominada de Entropia T-300 K, um dispositivo de poder imenso que, sim, poderia aquecer o mundo, mas que também poderia fazer o oposto, funcionar como um imenso refrigerador e resfriar o planeta, contendo o poder de destruição do vírus. Ao ser descoberto seus planos secretos, ele é forçado a desaparecer misteriosamente, deixando seu projeto inacabado e espalhando o seu plano em uma trilha de fragmentos contendo enigmas para serem decifrados.
+
+Sua única esperança são os alunos do IFSC/São José, que tiveram contato com o Dr. Thorne, por meio de uma visita guiada ao Centro de Estudos Climáticos da Antártida (CECA). A jornada de vocês começa com a única herança que ele deixou: seu tablet pessoal.
+
+Que o GAME comece, jovens investigadores!!!
+
+
+  <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/O_Legado_Mentor.jpeg" alt="Que os jogos comecem!">
+
+
+[[Começar a investigação->Acesso a Fase 1]]
+
+
+:: Variaveis Iniciais\\\  [Startup\] \[Startup\\] {"position":"100,0","size":"100,100"}
+(set: $fase2_completa to false)
+(set: $fase3_completa to false)
+(set: $fase4_completa to false)
+(set: $maquina_regulada to false)
+
+(set: $max_tentativas to 3)
+(set: $tentativas to $max_tentativas)
+
+<!-- Início das senhas do Jogo -->
+(set: $senha_correta1 to "albedo")
+(set: $senha_correta2 to "900")
+(set: $senha_correta3 to "boyle")
+(set: $senha_correta4 to "energia interna")
+(set: $senha_correta5 to "latente")
+(set: $senha_correta6 to "irradiação")
+ 
+ <img src="https://github.com/Humba-IFSC/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/img/Episodio_I.jpeg" alt="Descrição da imagem de abertura">
+
+<!--  Iniciando o Jogo -->
+[[Projeto T-300 K - Início do Jogo]]
+
+
+:: VelhoEstilo {"position":"1000,400","size":"100,100"}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://cdn.tailwindcss.com');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0f172a; /* slate-900 */
+    color: #cbd5e1; /* slate-300 */
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+tw-story {
+    padding: 2rem;
+}
+
+h1, h2, h3, .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+p.enigma {
+    background-color: #1e293b; /* slate-800 */
+    border-left: 4px solid #3b82f6; /* blue-500 */
+    padding: 1rem;
+    font-style: italic;
+    color: #94a3b8; /* slate-400 */
+}
+
+a {
+    color: #60a5fa; /* blue-400 */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #93c5fd; /* blue-300 */
+    text-decoration: underline;
+}
+
+/* Estilizando os links para parecerem com os cards */
+a .phase-card {
+    transition: all 0.2s ease-in-out;
+}
+
+a:hover .phase-card {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+}
+
+.phase-card {
+    z-index: 10;
+}
+
+.glow-effect {
+    animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+}
+
+/* Estilo para o campo de input */
+input[type="text"] {
+    background-color: #334155; /* slate-700 */
+    border: 1px solid #475569; /* slate-600 */
+    color: #e2e8f0; /* slate-200 */
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+/* Estilo para o botão */
+button {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #3b82f6; /* blue-500 */
+}
+
+
+:: StoryStylesheet [stylesheet]
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Orbitron:wght@400;500;700&display=swap');
+@import url('https://cdn.tailwindcss.com');
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0f172a; /* slate-900 */
+    color: #cbd5e1; /* slate-300 */
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+tw-story {
+    padding: 2rem;
+}
+
+h1, h2, h3, .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+}
+
+p.enigma {
+    background-color: #1e293b; /* slate-800 */
+    border-left: 4px solid #3b82f6; /* blue-500 */
+    padding: 1rem;
+    font-style: italic;
+    color: #94a3b8; /* slate-400 */
+}
+
+a {
+    color: #60a5fa; /* blue-400 */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #93c5fd; /* blue-300 */
+    text-decoration: underline;
+}
+
+/* Estilizando os links para parecerem com os cards */
+a .phase-card {
+    transition: all 0.2s ease-in-out;
+}
+
+a:hover .phase-card {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+}
+
+.phase-card {
+    z-index: 10;
+}
+
+.glow-effect {
+    animation: pulse-glow 2s infinite ease-in-out;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+    50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); }
+}
+
+/* Estilo para o campo de input */
+input[type="text"] {
+    background-color: #334155; /* slate-700 */
+    border: 1px solid #475569; /* slate-600 */
+    color: #e2e8f0; /* slate-200 */
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-right: 0.5rem;
+}
+
+/* Estilo para o botão */
+button {
+    background-color: #2563eb; /* blue-600 */
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #3b82f6; /* blue-500 */
+}
+
+/* --- ESTILO PARA IMAGENS (RESPONSIVO) --- */
+/* Adicionado para controlar o tamanho e a apresentação das imagens */
+tw-passage img {
+    width: 70%;          /* A imagem ocupa 70% da largura do contentor */
+    height: auto;         /* A altura ajusta-se automaticamente para manter a proporção */
+    display: block;       /* Permite centrar a imagem com margens automáticas */
+    margin: 1.5rem auto;  /* 1.5rem de margem em cima/baixo e centrado horizontalmente */
+    border-radius: 8px;   /* Cantos arredondados para um visual mais suave */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra subtil para dar profundidade */
+    max-width: 100%;      /* Garantia extra: a imagem nunca ultrapassará o seu contentor */
+}
