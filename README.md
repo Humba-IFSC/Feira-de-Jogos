@@ -19,8 +19,8 @@ Explore, jogue e divirta-se!
 ### 🌌 Projeto UHIMWS
 *   **Descrição:** Projeto Ilhas de Calor Urbano em São José/SC.
 *   **Tecnologias:** HTML, CSS.
-*   **Repositório:** [Humba-IFSC/UHIMWS](https://github.com/Humba-IFSC/Feira-de-Jogos/tree/main/uhimws)
-*   **▶️ Quer espiar?:** **[Atualmente, onde estamos no Projeto!](https://humba-ifsc.github.io/Feira-de-Jogos/uhimws/analise-sensores.html)**
+*   **Repositório:** [Humba-IFSC/UHIMWS](https://github.com/Humba-IFSC/Feira-de-Jogos/tree/main/uhimws-project)
+*   **▶️ Quer espiar?:** **[Atualmente, onde estamos no Projeto!](https://humba-ifsc.github.io/Feira-de-Jogos/uhimws-project/dashboard/analise-sensores.html)**
 
 ---
 
