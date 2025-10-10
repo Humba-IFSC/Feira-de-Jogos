@@ -1,0 +1,33 @@
+# Ambientes virtuais e dependências do Python
+__pycache__/
+*.pyc
+venv/
+.env
+env/
+
+# Arquivos de dados (não devem ser versionados)
+data/raw/
+data/external/
+data/processed/
+*.csv
+*.xlsx
+*.parquet
+
+# Configurações de IDEs e editores
+.vscode/
+.idea/
+
+# Dependências e builds do PlatformIO/Arduino
+.pio/
+.ionide/
+firmware/.pio/
+firmware/build/
+*.o
+*.a
+*.bin
+*.elf
+*.hex
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
