@@ -34,4 +34,5 @@ Por favor, crie uma nova branch para cada funcionalidade e envie um Pull Request
 ## 👥 Autores
 
 - **Humberto Luz Oliveira** - _Líder do Projeto_
-- [Adicionar outros membros da equipe aqui]
+- **Beatriz P. Abreu** - _Bolsista_
+- **Germano D. Coelho** - _Bolsista_
