@@ -34,6 +34,12 @@ Por favor, crie uma nova branch para cada funcionalidade e envie um Pull Request
 
 ## 👥 Autores
 
+<<<<<<< HEAD
 - **Humberto Luz Oliveira** - _Líder desse Projeto_
 - **Beatriz P. Abreu** - _Bolsista_
 - **Germano  
+=======
+- **Humberto Luz Oliveira** - _Líder do Projeto_
+- **Beatriz P. Abreu** - _Bolsista_
+- **Germano D. Coelho** - _Bolsista_
+>>>>>>> 0e6ef8e6475f54868cca1d41b05755c4e09817db
