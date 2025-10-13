@@ -22,6 +22,7 @@ Este projeto visa desenvolver um sistema robusto e preciso para coleta de dados 
 - **/firmware**: Código-fonte do firmware para o ESP32.
 - **/hardware**: Esquemas elétricos, design de PCB e lista de materiais (BOM).
 - **/data_pipeline**: Arquivos de configuração para a infraestrutura de dados (Docker, etc.).
+- [Veja a função de cada diretório->Árvore do Repositório](Estrutura_diretorios.md)
 
 ## 🚀 Como Começar
 
@@ -33,5 +34,6 @@ Por favor, crie uma nova branch para cada funcionalidade e envie um Pull Request
 
 ## 👥 Autores
 
-- **Humberto Luz Oliveira** - _Líder do Projeto_
-- [Adicionar outros membros da equipe aqui]
+- **Humberto Luz Oliveira** - _Líder desse Projeto_
+- **Beatriz P. Abreu** - _Bolsista_
+- **Germano  
