@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Física do Código Albedo - Guia Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Brilliant Blues -->
+    <!-- Application Structure Plan: A aplicação foi estruturada como um guia de estudo vertical e interativo. Uma barra de navegação fixa no topo permite que os alunos saltem diretamente para a seção de física correspondente à sua fase do jogo. Cada fase é apresentada em um "card" que contém a explicação teórica do documento original, enriquecida com uma visualização interativa (gráficos de Chart.js ou diagramas HTML/CSS/JS). Esta estrutura foi escolhida para facilitar o acesso rápido à informação relevante e aprofundar o entendimento através da interação, tornando o estudo menos passivo. -->
+    <!-- Visualization & Content Choices: 
+        Fase 1 (Albedo): Goal: Compare. Method: Gráfico de barras (Chart.js/Canvas) para comparar valores de albedo de diferentes superfícies.
+        Fase 2 (Calor Específico): Goal: Change. Method: Gráfico de linhas (Chart.js/Canvas) para mostrar taxas de aquecimento diferentes, ilustrando a inércia térmica.
+        Fase 3 (Lei de Boyle): Goal: Relationships. Method: Diagrama interativo (HTML/CSS/JS) com um slider para controlar o volume e ver a pressão mudar, demonstrando a relação inversa.
+        Fase 4 (1ª Lei Termo.): Goal: Organize. Method: Diagrama interativo (HTML/CSS/JS) com botões para manipular Calor (Q) e Trabalho (W) e ver o efeito na Energia Interna (ΔU).
+        Fase 5 (Calor Latente): Goal: Change. Method: Gráfico de linhas (Chart.js/Canvas) mostrando a curva de aquecimento da água com os platôs de mudança de fase.
+        Fase 6 (Irradiação): Goal: Inform. Method: Diagrama visual (HTML/CSS) comparando os 3 tipos de transferência de calor. Todas as visualizações evitam SVG/Mermaid conforme requerido. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #0B132B;
+            color: #E0E0E0;
+        }
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .card {
+            background-color: #1C2541;
+            border: 1px solid #3A506B;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            max-height: 350px;
+            background-color: #0d1831;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #3A506B;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-opacity-80 backdrop-blur-md sticky top-0 z-50 bg-[#1C2541] border-b border-[#3A506B]">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="font-orbitron text-xl font-bold text-[#6FFFE9]">A Física do Jogo</h1>
+            <div class="hidden md:flex space-x-4">
+                <a href="#fase1" class="text-sm font-semibold hover:text-[#6FFFE9] transition-colors">Fase 1</a>
+                <a href="#fase2" class="text-sm font-semibold hover:text-[#6FFFE9] transition-colors">Fase 2</a>
+                <a href="#fase3" class="text-sm font-semibold hover:text-[#6FFFE9] transition-colors">Fase 3</a>
+                <a href="#fase4" class="text-sm font-semibold hover:text-[#6FFFE9] transition-colors">Fase 4</a>
+                <a href="#fase5" class="text-sm font-semibold hover:text-[#6FFFE9] transition-colors">Fase 5</a>
+                <a href="#fase6" class="text-sm font-semibold hover:text-[#6FFFE9] transition-colors">Fase 6</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 md:py-12">
+        <div class="text-center mb-16">
+            <h2 class="font-orbitron text-4xl md:text-5xl font-bold text-[#6FFFE9] mb-4">Guia de Estudo Interativo</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-slate-300">Um material de apoio para todos os "Game-Builders". Use este guia para conectar os conceitos de Física Térmica com os desafios e a narrativa de cada fase do jogo.</p>
+        </div>
+
+        <div class="space-y-12">
+            <!-- FASE 1 -->
+            <section id="fase1" class="card rounded-lg p-6 md:p-8">
+                <h3 class="font-orbitron text-3xl text-[#5BC0BE] mb-4">🎯 Fase 1: O Legado do Mentor</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2">🔬 Conceito: Albedo</h4>
+                        <p class="mb-3"><strong>O que é?</strong> Albedo é a medida de quanta energia solar uma superfície consegue refletir. Superfícies claras (alto albedo) refletem mais luz e aquecem menos. Superfícies escuras (baixo albedo) absorvem mais luz e aquecem mais.</p>
+                        <p><strong>Aplicação no Jogo:</strong> É o conceito central da trama. O aquecimento global, intensificado pelas Ilhas de Calor (áreas urbanas com baixo albedo), ativa o vírus `KALORIS`. A senha do tablet é a própria palavra-chave da pesquisa do Dr. Thorne.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2 text-center">Visualização: Albedo Comparativo</h4>
+                        <p class="text-sm text-slate-400 mb-2 text-center">O gráfico mostra o poder de reflexão de diferentes superfícies. Note como o asfalto absorve quase toda a energia, enquanto a neve fresca reflete quase tudo.</p>
+                        <div class="chart-container">
+                            <canvas id="albedoChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FASE 2 -->
+            <section id="fase2" class="card rounded-lg p-6 md:p-8">
+                <h3 class="font-orbitron text-3xl text-[#5BC0BE] mb-4">🎯 Fase 2: A Febre Urbana</h3>
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2">🔬 Conceito: Calor Específico</h4>
+                        <p class="mb-3"><strong>O que é?</strong> É a "inércia térmica" de um material. Diz quanta energia (calor) é necessária para aumentar a temperatura de 1kg do material em 1°C. Materiais com baixo calor específico (como o asfalto do jogo) esquentam muito rápido.</p>
+                        <p><strong>Aplicação no Jogo:</strong> A ΔUmbra criou um asfalto com calor específico perigosamente baixo para criar "fornalhas" urbanas e potencializar o vírus. Os jogadores devem calcular esse valor para obter a senha.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2 text-center">Visualização: Inércia Térmica</h4>
+                        <p class="text-sm text-slate-400 mb-2 text-center">O gráfico simula o aquecimento de 1kg de água e 1kg de asfalto recebendo a mesma quantidade de energia. Observe como o asfalto (baixo calor específico) esquenta muito mais rápido.</p>
+                        <div class="chart-container">
+                            <canvas id="specificHeatChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FASE 3 -->
+            <section id="fase3" class="card rounded-lg p-6 md:p-8">
+                <h3 class="font-orbitron text-3xl text-[#5BC0BE] mb-4">🎯 Fase 3: O Sopro do Fantasma</h3>
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2">🔬 Conceito: Lei de Boyle</h4>
+                        <p class="mb-3"><strong>O que é?</strong> Para um gás a temperatura constante, pressão e volume são inversamente proporcionais. Se você diminui o volume pela metade, a pressão dobra.</p>
+                        <p><strong>Aplicação no Jogo:</strong> O Zepelim da ΔUmbra usa sistemas de controle de pressão para se manter estável. O jogador deve manipular esses princípios para destravar mecanismos.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2 text-center">Interação: Pistão de Boyle</h4>
+                        <p class="text-sm text-slate-400 mb-2 text-center">Arraste o slider para alterar o volume do cilindro e observe como a pressão reage instantaneamente para manter a equação P₁V₁ = P₂V₂.</p>
+                        <div class="chart-container flex flex-col items-center justify-center p-4">
+                            <div class="w-full max-w-xs">
+                                <label for="volumeSlider" class="text-sm">Volume: <span id="volumeValue">5</span> L</label>
+                                <input id="volumeSlider" type="range" min="1" max="10" value="5" step="0.5" class="w-full h-2 bg-gray-600 rounded-lg appearance-none cursor-pointer">
+                            </div>
+                            <div class="mt-4 text-center">
+                                <p class="text-lg">Pressão Resultante:</p>
+                                <p class="font-orbitron text-3xl text-[#6FFFE9]" id="pressureValue">2.0 atm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- FASE 4 -->
+            <section id="fase4" class="card rounded-lg p-6 md:p-8">
+                <h3 class="font-orbitron text-3xl text-[#5BC0BE] mb-4">🎯 Fase 4: A Máquina de Entropia</h3>
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2">🔬 Conceito: 1ª Lei da Termodinâmica</h4>
+                        <p class="mb-3"><strong>O que é?</strong> É a lei da conservação de energia: a variação da energia interna de um sistema (ΔU) é igual ao calor (Q) adicionado menos o trabalho (W) realizado por ele (ΔU = Q - W).</p>
+                        <p><strong>Aplicação no Jogo:</strong> O reator está superaquecendo (recebendo muito calor Q) sem realizar trabalho. Para estabilizá-lo, o jogador precisa converter esse calor em trabalho.</p>
+                    </div>
+                    <div>
+                         <h4 class="font-orbitron text-xl mb-2 text-center">Interação: Balanço Energético</h4>
+                        <p class="text-sm text-slate-400 mb-2 text-center">Clique nos botões para ver como Calor e Trabalho afetam a Energia Interna do sistema (a barra azul).</p>
+                        <div class="chart-container flex flex-col items-center justify-around p-4">
+                            <div>
+                                <p class="text-center">Energia Interna (ΔU)</p>
+                                <div class="w-64 h-8 bg-gray-700 rounded-md mt-2">
+                                    <div id="energyBar" class="bg-[#5BC0BE] h-full rounded-md" style="width: 50%;"></div>
+                                </div>
+                                <p id="energyLevel" class="text-center font-orbitron mt-1">50 / 100</p>
+                            </div>
+                            <div class="flex space-x-4">
+                                <button id="addHeat" class="bg-[#5BC0BE] text-black font-bold py-2 px-4 rounded-md">+ Adicionar Calor (Q)</button>
+                                <button id="doWork" class="bg-[#6FFFE9] text-black font-bold py-2 px-4 rounded-md">- Realizar Trabalho (W)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FASE 5 -->
+            <section id="fase5" class="card rounded-lg p-6 md:p-8">
+                <h3 class="font-orbitron text-3xl text-[#5BC0BE] mb-4">🎯 Fase 5: O Coração de Gelo</h3>
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2">🔬 Conceito: Calor Latente</h4>
+                        <p class="mb-3"><strong>O que é?</strong> É a energia "escondida" necessária para uma substância mudar de estado (ex: gelo para água) **sem mudar de temperatura**. A temperatura fica constante durante a transição.</p>
+                        <p><strong>Aplicação no Jogo:</strong> Os enigmas no laboratório de criogenia envolvem processos de congelamento e descongelamento, onde o jogador deve entender que a mudança de estado requer energia.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2 text-center">Visualização: Curva de Aquecimento da Água</h4>
+                        <p class="text-sm text-slate-400 mb-2 text-center">O gráfico mostra a temperatura da água enquanto ela recebe calor. Note os platôs em 0°C (fusão) e 100°C (vaporização), onde a temperatura não muda.</p>
+                        <div class="chart-container">
+                            <canvas id="latentHeatChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <!-- FASE 6 -->
+            <section id="fase6" class="card rounded-lg p-6 md:p-8">
+                <h3 class="font-orbitron text-3xl text-[#5BC0BE] mb-4">🎯 Fase 6: O Reflexo da Salvação</h3>
+                 <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2">🔬 Conceito: Irradiação</h4>
+                        <p class="mb-3"><strong>O que é?</strong> É a transferência de calor por ondas eletromagnéticas (como a luz do Sol). É a única forma que não precisa de um meio material, podendo viajar pelo vácuo do espaço.</p>
+                        <p><strong>Aplicação no Jogo:</strong> Este conceito fecha o ciclo. O problema (aquecimento solar) é causado pela irradiação, e a solução (o efeito da máquina) também é propagada por irradiação.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-orbitron text-xl mb-2 text-center">Diagrama: Transferência de Calor</h4>
+                        <p class="text-sm text-slate-400 mb-2 text-center">Compare os três mecanismos de transferência de calor.</p>
+                        <div class="chart-container flex flex-col justify-around text-center p-4 space-y-2">
+                           <div class="p-2 border border-dashed border-[#5BC0BE] rounded-md">
+                                <p class="font-bold">Condução</p>
+                                <p class="text-sm">Calor por contato direto (ex: mão na xícara quente)</p>
+                           </div>
+                           <div class="p-2 border border-dashed border-[#5BC0BE] rounded-md">
+                                <p class="font-bold">Convecção</p>
+                                <p class="text-sm">Calor pelo movimento de fluidos (ex: ar quente subindo)</p>
+                           </div>
+                           <div class="p-2 border border-dashed border-[#6FFFE9] rounded-md bg-opacity-20 bg-[#6FFFE9]">
+                                <p class="font-bold text-[#6FFFE9]">Irradiação</p>
+                                <p class="text-sm">Calor por ondas, sem necessidade de meio (ex: luz do Sol)</p>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+<script>
+    const chartDefaultOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            x: { grid: { color: 'rgba(58, 80, 107, 0.5)' }, ticks: { color: '#E0E0E0' } },
+            y: { grid: { color: 'rgba(58, 80, 107, 0.5)' }, ticks: { color: '#E0E0E0' } }
+        },
+        plugins: {
+            legend: { labels: { color: '#E0E0E0' } },
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        return Array.isArray(label) ? label.join(' ') : label;
+                    }
+                }
+            }
+        }
+    };
+
+    // Albedo Chart
+    new Chart(document.getElementById('albedoChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Neve Fresca', 'Gelo', 'Areia Clara', 'Grama', 'Asfalto Novo', 'Oceano'],
+            datasets: [{
+                label: 'Albedo (Poder de Reflexão)',
+                data: [0.9, 0.6, 0.4, 0.25, 0.05, 0.06],
+                backgroundColor: 'rgba(91, 192, 190, 0.6)',
+                borderColor: 'rgba(91, 192, 190, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: { ...chartDefaultOptions, indexAxis: 'y' }
+    });
+
+    // Specific Heat Chart
+    new Chart(document.getElementById('specificHeatChart'), {
+        type: 'line',
+        data: {
+            labels: ['0', '10', '20', '30', '40', '50'],
+            datasets: [{
+                label: 'Asfalto (c=900 J/kg°C)',
+                data: [20, 31, 42, 53, 64, 75],
+                borderColor: '#6FFFE9',
+                tension: 0.1
+            }, {
+                label: 'Água (c=4186 J/kg°C)',
+                data: [20, 22.1, 24.2, 26.3, 28.4, 30.5],
+                borderColor: '#5BC0BE',
+                tension: 0.1
+            }]
+        },
+        options: { ...chartDefaultOptions, scales: {...chartDefaultOptions.scales, x: {...chartDefaultOptions.scales.x, title: { display: true, text: 'Energia Adicionada (kJ)', color: '#E0E0E0' }}, y: {...chartDefaultOptions.scales.y, title: { display: true, text: 'Temperatura (°C)', color: '#E0E0E0' }} } }
+    });
+
+    // Boyle's Law Interaction
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeValue = document.getElementById('volumeValue');
+    const pressureValue = document.getElementById('pressureValue');
+    volumeSlider.addEventListener('input', () => {
+        const volume = parseFloat(volumeSlider.value);
+        const pressure = 10 / volume; // P1*V1 = 1 * 10 = 10 (constante)
+        volumeValue.textContent = volume.toFixed(1);
+        pressureValue.textContent = pressure.toFixed(2);
+    });
+
+    // 1st Law Interaction
+    const energyBar = document.getElementById('energyBar');
+    const energyLevel = document.getElementById('energyLevel');
+    let currentEnergy = 50;
+    document.getElementById('addHeat').addEventListener('click', () => {
+        currentEnergy = Math.min(100, currentEnergy + 10);
+        updateEnergyBar();
+    });
+    document.getElementById('doWork').addEventListener('click', () => {
+        currentEnergy = Math.max(0, currentEnergy - 10);
+        updateEnergyBar();
+    });
+    function updateEnergyBar() {
+        energyBar.style.width = `${currentEnergy}%`;
+        energyLevel.textContent = `${currentEnergy} / 100`;
+    }
+
+    // Latent Heat Chart
+    new Chart(document.getElementById('latentHeatChart'), {
+        type: 'line',
+        data: {
+            labels: ['Início', 'Gelo Aquece', 'Fusão', 'Água Aquece', 'Vaporização', 'Vapor Aquece'],
+            datasets: [{
+                label: 'Temperatura (°C)',
+                data: [-10, 0, 0, 100, 100, 110],
+                borderColor: '#5BC0BE',
+                fill: false,
+                stepped: false,
+            }]
+        },
+         options: { ...chartDefaultOptions, scales: {...chartDefaultOptions.scales, x: {...chartDefaultOptions.scales.x, title: { display: true, text: 'Calor Adicionado', color: '#E0E0E0' }}, y: {...chartDefaultOptions.scales.y, title: { display: true, text: 'Temperatura (°C)', color: '#E0E0E0' }} } }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+</script>
+
+</body>
+</html>
+
