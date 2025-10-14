@@ -1,6 +1,6 @@
 
 ## Guia Passo a Passo para o Download de Dados Meteorológicos Mensais do INMET
-![[Mapa_INMET.png]]
+**![Mapa para Obter Dados do INMET](../img/Mapa_INMET.png)**
 - **Link**: [Dados Meteorológicos INMET](https://www.youtube.com/watch?v=8M1hZt-vT0E)
 ### 1. Acesso ao Portal e Início da Requisição
 
