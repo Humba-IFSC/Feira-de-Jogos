@@ -17,6 +17,7 @@
 
 ▶ [Relatório dos Sensores](https://humba-ifsc.github.io/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/Infografico_resultados_Fase1.html)
 
+▶ [Física do Jogo](https://humba-ifsc.github.io/Feira-de-Jogos/T-300_K-Codigo_Albedo/html/Conteudos_Fisica_Termica.html)
 ---
 
 ## Capítulo 0: O Prelúdio  
