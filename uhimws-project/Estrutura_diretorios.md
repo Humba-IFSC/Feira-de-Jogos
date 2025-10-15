@@ -1,3 +1,4 @@
+```
 uhimws-project/
 ├── 📂 analysis/          # Scripts e notebooks para análise de dados (ADI, ADE)
 │   ├── 📂 notebooks/      # Análises exploratórias (Jupyter, R Markdown)
@@ -27,3 +28,4 @@ uhimws-project/
 ├── 📄 .gitignore         # Arquivo para ignorar arquivos e pastas (essencial!)
 ├── 📄 LICENSE            # Licença do projeto (ex: MIT)
 └── 📄 README.md          # O cartão de visitas do seu projeto (o mais importante!)
+```
