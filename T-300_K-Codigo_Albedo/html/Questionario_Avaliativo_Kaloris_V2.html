@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário Avaliativo: T-300 K - Código Albedo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f3f4f6;
+        }
+        .scale-radio {
+            width: 1.25rem;
+            height: 1.25rem;
+            cursor: pointer;
+        }
+        .section-hidden {
+            display: none;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-indigo-900 text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2 cursor-pointer" onclick="navigateTo('home')">
+                <i class="fas fa-gamepad text-2xl text-yellow-400"></i>
+                <span class="text-xl font-bold">T-300 K: Código Albedo</span>
+            </div>
+            <div class="text-sm hidden md:block">Avaliação de Gamificação</div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-8 min-h-screen">
+        
+        <!-- HOME PAGE -->
+        <div id="home" class="fade-in">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-extrabold text-indigo-900 mb-4">Questionário Avaliativo do Projeto</h1>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                    Bem-vindo à avaliação do projeto de gamificação <strong>"T-300 K: Código Albedo"</strong>.
+                    Sua opinião é fundamental para entendermos o impacto da metodologia de Aprendizagem Baseada em Jogos 
+                    no seu processo de ensino-aprendizagem de Física Térmica.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Card Part 1 -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-blue-500">
+                    <div class="p-8">
+                        <div class="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4 mx-auto">
+                            <i class="fas fa-flask text-2xl text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-2">Parte 1</h3>
+                        <p class="text-gray-500 text-center mb-6 text-sm">Metodologia, Conteúdo e Engajamento.</p>
+                        <button onclick="navigateTo('part1')" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors">
+                            Iniciar Parte 1
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card Part 2 -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-purple-500">
+                    <div class="p-8">
+                        <div class="flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-4 mx-auto">
+                            <i class="fas fa-chalkboard-teacher text-2xl text-purple-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-2">Parte 2</h3>
+                        <p class="text-gray-500 text-center mb-6 text-sm">Avaliação da Condução do Professor.</p>
+                        <button onclick="navigateTo('part2')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded transition-colors">
+                            Iniciar Parte 2
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card Part 3 -->
+                <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow overflow-hidden border-t-4 border-green-500">
+                    <div class="p-8">
+                        <div class="flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-4 mx-auto">
+                            <i class="fas fa-user-graduate text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-center mb-2">Parte 3</h3>
+                        <p class="text-gray-500 text-center mb-6 text-sm">Autoavaliação e Conclusão.</p>
+                        <button onclick="navigateTo('part3')" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded transition-colors">
+                            Iniciar Parte 3
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 text-center bg-yellow-50 p-6 rounded-lg border border-yellow-200 max-w-2xl mx-auto">
+                <h4 class="font-bold text-yellow-800 mb-2"><i class="fas fa-save mr-2"></i>Como funciona?</h4>
+                <p class="text-sm text-yellow-800">
+                    Preencha as três partes. Ao final da Parte 3, você poderá baixar um arquivo CSV com suas respostas para enviar ao professor.
+                </p>
+            </div>
+        </div>
+
+        <!-- FORM CONTAINER -->
+        <form id="assessmentForm" onsubmit="event.preventDefault();">
+            
+            <!-- PART 1 -->
+            <div id="part1" class="section-hidden fade-in max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <div class="border-b pb-4 mb-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-blue-800">Parte 1: Metodologia e Conteúdo</h2>
+                    <span class="text-sm bg-blue-100 text-blue-800 py-1 px-3 rounded-full">Escala 1 a 5</span>
+                </div>
+                
+                <p class="mb-6 text-gray-600 italic">1 = Discordo Totalmente | 5 = Concordo Totalmente</p>
+
+                <div class="space-y-6">
+                    <!-- Likert Questions Generator -->
+                    <div id="p1-likert-container"></div>
+
+                    <hr class="my-8 border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Questões Abertas</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block font-medium text-gray-700 mb-2">9. Das missões do jogo, qual desafio ilustrou melhor um conceito da Termodinâmica e por quê?</label>
+                            <textarea name="q9" class="w-full p-3 border rounded focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-medium text-gray-700 mb-2">10. O uso de dados reais da miniestação ajudou a perceber a urgência do aquecimento global? Justifique.</label>
+                            <textarea name="q10" class="w-full p-3 border rounded focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-medium text-gray-700 mb-2">11. A programação (Phaser/Twine) foi mais desafiadora ou recompensadora para seu aprendizado?</label>
+                            <textarea name="q11" class="w-full p-3 border rounded focus:ring-2 focus:ring-blue-500" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button type="button" onclick="navigateTo('home')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-6 rounded">Voltar</button>
+                    <button type="button" onclick="navigateTo('part2')" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded">Próximo: Parte 2 <i class="fas fa-arrow-right ml-2"></i></button>
+                </div>
+            </div>
+
+            <!-- PART 2 -->
+            <div id="part2" class="section-hidden fade-in max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <div class="border-b pb-4 mb-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-purple-800">Parte 2: Condução do Professor</h2>
+                    <span class="text-sm bg-purple-100 text-purple-800 py-1 px-3 rounded-full">Escala 1 a 5</span>
+                </div>
+
+                <p class="mb-6 text-gray-600 italic">1 = Insatisfatório | 5 = Excelente</p>
+
+                <div class="space-y-6">
+                    <div id="p2-likert-container"></div>
+
+                    <hr class="my-8 border-gray-200">
+                    <h3 class="text-xl font-semibold text-gray-700 mb-4">Feedback Descritivo</h3>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block font-medium text-gray-700 mb-2">17. Quais foram os principais pontos fortes na condução do professor?</label>
+                            <textarea name="q17" class="w-full p-3 border rounded focus:ring-2 focus:ring-purple-500" rows="3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-medium text-gray-700 mb-2">18. O que poderia ser melhorado na estrutura da disciplina ou condução? (Pontos Fracos)</label>
+                            <textarea name="q18" class="w-full p-3 border rounded focus:ring-2 focus:ring-purple-500" rows="3"></textarea>
+                        </div>
+                        <div>
+                            <label class="block font-medium text-gray-700 mb-2">19. Sugestões para tornar a proposta mais atrativa e motivadora:</label>
+                            <textarea name="q19" class="w-full p-3 border rounded focus:ring-2 focus:ring-purple-500" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between">
+                    <button type="button" onclick="navigateTo('part1')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-6 rounded">Voltar</button>
+                    <button type="button" onclick="navigateTo('part3')" class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-6 rounded">Próximo: Parte 3 <i class="fas fa-arrow-right ml-2"></i></button>
+                </div>
+            </div>
+
+            <!-- PART 3 -->
+            <div id="part3" class="section-hidden fade-in max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+                <div class="border-b pb-4 mb-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-green-800">Parte 3: Autoavaliação</h2>
+                </div>
+
+                <div class="space-y-6">
+                    
+                    <!-- Q20 -->
+                    <div class="bg-gray-50 p-4 rounded-md">
+                        <label class="block font-bold text-gray-800 mb-2">20. Qual foi o seu nível de dedicação a este projeto? (1 a 5)</label>
+                        <div class="flex space-x-6 mb-4">
+                            <label class="flex items-center space-x-2"><input type="radio" name="q20_scale" value="1" class="scale-radio"> <span>1</span></label>
+                            <label class="flex items-center space-x-2"><input type="radio" name="q20_scale" value="2" class="scale-radio"> <span>2</span></label>
+                            <label class="flex items-center space-x-2"><input type="radio" name="q20_scale" value="3" class="scale-radio"> <span>3</span></label>
+                            <label class="flex items-center space-x-2"><input type="radio" name="q20_scale" value="4" class="scale-radio"> <span>4</span></label>
+                            <label class="flex items-center space-x-2"><input type="radio" name="q20_scale" value="5" class="scale-radio"> <span>5</span></label>
+                        </div>
+                        <label class="block text-sm text-gray-600 mb-1">Justifique (Protagonismo):</label>
+                        <textarea name="q20_text" class="w-full p-2 border rounded" rows="2" placeholder="Descreva sua dedicação..."></textarea>
+                    </div>
+
+                    <!-- Q21 -->
+                    <div>
+                        <label class="block font-bold text-gray-800 mb-2">21. Qual foi o seu nível de conclusão do jogo?</label>
+                        <select name="q21" class="w-full p-3 border rounded bg-white">
+                            <option value="">Selecione...</option>
+                            <option value="Completo">Concluí a versão completa (Twine + Phaser 2D)</option>
+                            <option value="Basico">Concluí a versão mínima/básica (funcional, incompleta)</option>
+                            <option value="Roteiro">Apenas o roteiro no Twine foi finalizado</option>
+                            <option value="Parcial">Não consegui finalizar o desenvolvimento</option>
+                        </select>
+                    </div>
+
+                    <!-- Q22 -->
+                    <div>
+                        <label class="block font-bold text-gray-800 mb-2">22. Você apresentou sua versão na Feira de Jogos?</label>
+                        <div class="flex flex-col space-y-2">
+                            <label class="flex items-center space-x-2"><input type="radio" name="q22" value="Sim" class="scale-radio"> <span>Sim, apresentei.</span></label>
+                            <label class="flex items-center space-x-2"><input type="radio" name="q22" value="Nao" class="scale-radio"> <span>Não, não apresentei.</span></label>
+                            <label class="flex items-center space-x-2"><input type="radio" name="q22" value="NA" class="scale-radio"> <span>A Feira não foi realizada/não aplicável.</span></label>
+                        </div>
+                    </div>
+
+                    <!-- Q23 -->
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-2">23. Se não finalizou, quais foram os principais obstáculos?</label>
+                        <textarea name="q23" class="w-full p-3 border rounded focus:ring-2 focus:ring-green-500" rows="3"></textarea>
+                    </div>
+
+                    <!-- Q24 -->
+                    <div>
+                        <label class="block font-medium text-gray-700 mb-2">24. Como melhorar seu desempenho em futuras oportunidades (Melhoria Contínua)?</label>
+                        <textarea name="q24" class="w-full p-3 border rounded focus:ring-2 focus:ring-green-500" rows="3"></textarea>
+                    </div>
+
+                    <div class="bg-blue-50 p-4 rounded border border-blue-200 mt-6">
+                        <label class="block font-bold text-blue-900 mb-1">Identificação (Opcional para CSV)</label>
+                        <input type="text" name="student_name" placeholder="Seu Nome" class="w-full p-2 border rounded">
+                    </div>
+
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                    <button type="button" onclick="navigateTo('part2')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-6 rounded">Voltar</button>
+                    <button type="button" onclick="generateCSV()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded shadow-lg transform hover:scale-105 transition-transform flex items-center">
+                        <i class="fas fa-file-csv mr-2"></i> Finalizar e Baixar Respostas
+                    </button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 py-6 text-center mt-12">
+        <p>© 2024 Projeto T-300 K: Código Albedo. Gamificação no Ensino de Física.</p>
+    </footer>
+
+    <script>
+        // Data for dynamic question generation
+        const questionsPart1 = [
+            { id: 1, text: "A aplicação da gamificação (enredo, desafios) motivou meu engajamento." },
+            { id: 2, text: "Gostaria de ter mais disciplinas utilizando Aprendizagem Baseada em Jogos." },
+            { id: 3, text: "O foco no controle do Albedo como objetivo principal foi relevante e claro." },
+            { id: 4, text: "Compreendi melhor o feedback positivo do Albedo através da mecânica do jogo." },
+            { id: 5, text: "A integração da miniestação meteorológica tornou a Física mais aplicável." },
+            { id: 6, text: "Aprender Termodinâmica (Carnot, Entropia) foi mais fácil no contexto do jogo." },
+            { id: 7, text: "O desenvolvimento (Twine, Phaser) solidificou meu aprendizado de conceitos físicos." },
+            { id: 8, text: "Gostaria de continuar o desenvolvimento do jogo 'T-300 K'." }
+        ];
+
+        const questionsPart2 = [
+            { id: 12, text: "A atuação do professor como mediador foi satisfatória." },
+            { id: 13, text: "O planejamento permitiu articulação clara entre teoria e projeto." },
+            { id: 14, text: "A clareza das regras e feedback contribuíram para o aprendizado." },
+            { id: 15, text: "Houve tempo e recursos adequados para colaboração." },
+            { id: 16, text: "A integração de conceitos (metano, albedo) foi bem conduzida." }
+        ];
+
+        // Render Likert Questions
+        function renderLikert(containerId, questions, colorClass) {
+            const container = document.getElementById(containerId);
+            let html = '';
+            questions.forEach(q => {
+                html += `
+                <div class="bg-gray-50 p-4 rounded-md border border-gray-100 hover:border-${colorClass}-300 transition-colors">
+                    <p class="font-medium text-gray-800 mb-3"><span class="font-bold mr-2">${q.id}.</span> ${q.text}</p>
+                    <div class="flex justify-between md:justify-start md:space-x-8 px-2">
+                        ${[1, 2, 3, 4, 5].map(val => `
+                            <label class="flex flex-col items-center cursor-pointer group">
+                                <input type="radio" name="q${q.id}" value="${val}" class="scale-radio accent-${colorClass}-600 mb-1">
+                                <span class="text-xs text-gray-500 group-hover:text-${colorClass}-600">${val}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Init
+        window.onload = function() {
+            renderLikert('p1-likert-container', questionsPart1, 'blue');
+            renderLikert('p2-likert-container', questionsPart2, 'purple');
+        };
+
+        // Navigation Logic
+        function navigateTo(sectionId) {
+            // Hide all sections
+            ['home', 'part1', 'part2', 'part3'].forEach(id => {
+                document.getElementById(id).classList.add('section-hidden');
+            });
+            // Show target
+            document.getElementById(sectionId).classList.remove('section-hidden');
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // CSV Generation Logic
+        function generateCSV() {
+            const form = document.getElementById('assessmentForm');
+            const formData = new FormData(form);
+            
+            // Header Row
+            let csvContent = "data:text/csv;charset=utf-8,";
+            csvContent += "Nome,Q1,Q2,Q3,Q4,Q5,Q6,Q7,Q8,Q9,Q10,Q11,Q12,Q13,Q14,Q15,Q16,Q17,Q18,Q19,Q20_Nota,Q20_Texto,Q21_Status,Q22_Feira,Q23_Obstaculos,Q24_Melhoria\r\n";
+
+            // Data Row Construction
+            const name = formData.get('student_name') || "Anonimo";
+            let row = [`"${name}"`];
+
+            // P1 Likert (1-8)
+            for(let i=1; i<=8; i++) row.push(formData.get(`q${i}`) || "");
+            
+            // P1 Open (9-11) - escape quotes
+            for(let i=9; i<=11; i++) row.push(`"${(formData.get(`q${i}`)||'').replace(/"/g, '""')}"`);
+
+            // P2 Likert (12-16)
+            for(let i=12; i<=16; i++) row.push(formData.get(`q${i}`) || "");
+
+            // P2 Open (17-19)
+            for(let i=17; i<=19; i++) row.push(`"${(formData.get(`q${i}`)||'').replace(/"/g, '""')}"`);
+
+            // P3
+            row.push(formData.get('q20_scale') || "");
+            row.push(`"${(formData.get('q20_text')||'').replace(/"/g, '""')}"`);
+            row.push(formData.get('q21') || "");
+            row.push(formData.get('q22') || "");
+            row.push(`"${(formData.get('q23')||'').replace(/"/g, '""')}"`);
+            row.push(`"${(formData.get('q24')||'').replace(/"/g, '""')}"`);
+
+            csvContent += row.join(",") + "\r\n";
+
+            // Download Trigger
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `respostas_gamificacao_${name.replace(/\s+/g, '_')}.csv`);
+            document.body.appendChild(link); // Required for FF
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
